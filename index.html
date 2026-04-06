@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GavGavichBot_ | Fiverr Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #131922;
+      --panel-2: #1a2230;
+      --line: rgba(255,255,255,.08);
+      --text: #edf2f7;
+      --muted: #9aa8bb;
+      --accent: #ff8a1d;
+      --accent-2: #ffd56a;
+      --good: #6be3a9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,138,29,.16), transparent 28%),
+        linear-gradient(180deg, #0a0d12 0%, #10151d 100%);
+    }
+    .wrap {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+    .topbar, .panel {
+      border: 1px solid var(--line);
+      background: rgba(19,25,34,.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 22px 60px rgba(0,0,0,.35);
+    }
+    .topbar {
+      border-radius: 999px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+    .badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: #16120e;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-weight: 900;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav a, .hero-actions a, .chip {
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: .2s ease;
+    }
+    .nav a:hover, .hero-actions a:hover, .chip:hover, .chip.active {
+      transform: translateY(-1px);
+      border-color: rgba(255,213,106,.35);
+      background: rgba(255,138,29,.1);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .panel { border-radius: 26px; padding: 28px; }
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: var(--accent-2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+    h1 {
+      margin: 16px 0 14px;
+      font-size: clamp(2.4rem, 4vw, 4.6rem);
+      line-height: .98;
+      letter-spacing: -.04em;
+      max-width: 10ch;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.5rem;
+    }
+    .lead, .muted, .card p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 22px 0;
+    }
+    .hero-actions .primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #16120e;
+      border: none;
+      font-weight: 800;
+    }
+    .stats, .grid-3, .launch {
+      display: grid;
+      gap: 14px;
+    }
+    .stats { grid-template-columns: repeat(3, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .stat, .card, .chat-line, .code-box, .launch-step {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      padding: 16px;
+    }
+    .stat strong { display: block; margin-bottom: 6px; font-size: 1.2rem; }
+    .window {
+      display: grid;
+      gap: 12px;
+      background:
+        linear-gradient(180deg, rgba(255,138,29,.11), transparent 30%),
+        var(--panel);
+    }
+    .dots { display: flex; gap: 8px; }
+    .dots span {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,.2);
+    }
+    .dots span:nth-child(1) { background: #ff6a6a; }
+    .dots span:nth-child(2) { background: #ffd166; }
+    .dots span:nth-child(3) { background: #6be3a9; }
+    code, .mono { font-family: Consolas, "Courier New", monospace; }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .chip { cursor: pointer; }
+    .demo {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 16px;
+    }
+    .chat {
+      display: grid;
+      gap: 10px;
+    }
+    .chat-line strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent-2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .chat-line.bot strong { color: var(--good); }
+    .chat-line.reply {
+      background: #151922;
+      border-left: none;
+    }
+    .reply-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: #c0cada;
+      font-size: 12px;
+    }
+    .reply-icon {
+      font-size: 12px;
+      color: #d9e1ee;
+    }
+    .reply-ref {
+      color: #d9e1ee;
+    }
+    .launch { grid-template-columns: 1fr 1fr; }
+    .pill {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,138,29,.1);
+      border: 1px solid rgba(255,213,106,.28);
+      color: var(--accent-2);
+      font-family: Consolas, "Courier New", monospace;
+    }
+    .split-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    @media (max-width: 960px) {
+      .hero, .stats, .grid-3, .demo, .launch, .split-demo { grid-template-columns: 1fr; }
+      .topbar { border-radius: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="badge">GG</div>
+        <div>GavGavichBot_ • Twitch Bot Portfolio</div>
+      </div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#demo">Demo</a>
+        <a href="#launch">Launch</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="panel">
+        <div class="eyebrow">Fiverr Ready • Twitch Automation</div>
+        <h1>Custom Twitch bot made for streamers.</h1>
+        <p class="lead">
+          This portfolio page presents a custom Twitch IRC bot built for streamers who want smart commands,
+          chat automation, reply-based responses, and saved custom features. In these examples the viewer is
+          <strong>Fly</strong> and the bot name is <strong>GavGavichBot_</strong>.
+        </p>
+        <div class="hero-actions">
+          <a class="primary" href="#demo">Open demo</a>
+          <a href="#launch">See startup flow</a>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <strong>Custom commands</strong>
+            Standard command replies for Telegram, Discord, donate links, and more.
+          </div>
+          <div class="stat">
+            <strong>Spam formats</strong>
+            Supports <code>!commandNumber</code> and <code>!spam text amount</code>.
+          </div>
+          <div class="stat">
+            <strong>Persistent saves</strong>
+            New commands are stored and remain available after restart.
+          </div>
+        </div>
+      </div>
+
+      <div class="panel window">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="card">
+          <h2 style="font-size:1.05rem;">Quick command preview</h2>
+          <p class="muted">Viewer writes:</p>
+          <div class="code-box mono">!tg</div>
+          <p class="muted">Bot answers:</p>
+          <div class="code-box">Join my Telegram: https://t.me/your_channel</div>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.05rem;">Reply example</h2>
+          <div class="chat">
+            <div class="chat-line">
+              <strong>Fly</strong>
+              <div>!test</div>
+            </div>
+            <div class="chat-line reply bot">
+              <div class="reply-meta"><span class="reply-icon">↩</span><span>Replying to <span class="reply-ref">@Fly</span></span></div>
+              <strong>GavGavichBot_</strong>
+              <div>Hello, @Fly</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="panel">
+      <h2>Core features</h2>
+      <div class="grid-3" style="margin-top:16px;">
+        <article class="card">
+          <h2 style="font-size:1.05rem;">Standard command replies</h2>
+          <p>The bot can answer commands like <code>!tg</code>, <code>!discord</code>, <code>!donate</code>, or any other custom command created for the channel.</p>
+        </article>
+        <article class="card">
+          <h2 style="font-size:1.05rem;">Command spam mode</h2>
+          <p>Using a format like <code>!tg3</code>, the bot repeats the answer of <code>!tg</code> three times in a row.</p>
+        </article>
+        <article class="card">
+          <h2 style="font-size:1.05rem;">Phrase spam mode</h2>
+          <p>The bot can also spam plain text with a format like <code>!spam hello 5</code>, sending the word <code>hello</code> five times.</p>
+        </article>
+        <article class="card">
+          <h2 style="font-size:1.05rem;">New commands from chat</h2>
+          <p>Commands can be added directly from Twitch chat with <code>!cmd add !test text</code>, making updates easier for the streamer.</p>
+        </article>
+        <article class="card">
+          <h2 style="font-size:1.05rem;">Reply tag</h2>
+          <p>If the saved response ends with <code>#reply#</code>, the bot sends it as a reply to the original chat message.</p>
+        </article>
+        <article class="card">
+          <h2 style="font-size:1.05rem;">Mention placeholder</h2>
+          <p>The placeholder <code>%user%</code> becomes a real mention like <code>@Fly</code> when the command is used.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="demo" class="panel">
+      <h2>Mini demo showcase</h2>
+      <div class="chips" id="demoButtons">
+        <button class="chip active" data-demo="tg">!tg</button>
+        <button class="chip" data-demo="tg3">!tg3</button>
+        <button class="chip" data-demo="spam">!spam hello 5</button>
+        <button class="chip" data-demo="add">!cmd add !test ...</button>
+      </div>
+      <div class="demo">
+        <div class="card">
+          <h2 style="font-size:1.05rem;">User input</h2>
+          <div class="mono" id="demoCode"></div>
+          <p class="muted" id="demoNote" style="margin-top:14px;"></p>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.05rem;">Bot output</h2>
+          <div class="chat" id="demoChat"></div>
+        </div>
+      </div>
+
+      <div class="split-demo" style="grid-template-columns: 1fr;">
+        <div class="card">
+          <h2 style="font-size:1.05rem;">Version 1: Plain command</h2>
+          <div class="chat">
+            <div class="chat-line">
+              <strong>Moderator</strong>
+              <div>!cmd add !test hello</div>
+            </div>
+            <div class="chat-line bot">
+              <strong>GavGavichBot_</strong>
+              <div>command !test added</div>
+            </div>
+            <div class="chat-line">
+              <strong>Fly</strong>
+              <div>!test</div>
+            </div>
+            <div class="chat-line bot">
+              <strong>GavGavichBot_</strong>
+              <div>Hello</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.05rem;">Version 2: With %user%</h2>
+          <div class="chat">
+            <div class="chat-line">
+              <strong>Moderator</strong>
+              <div>!cmd add !test hello %user%</div>
+            </div>
+            <div class="chat-line bot">
+              <strong>GavGavichBot_</strong>
+              <div>command !test added</div>
+            </div>
+            <div class="chat-line">
+              <strong>Fly</strong>
+              <div>!test</div>
+            </div>
+            <div class="chat-line bot">
+              <strong>GavGavichBot_</strong>
+              <div>Hello, @Fly</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.05rem;">Version 3: With #reply#</h2>
+          <div class="chat">
+            <div class="chat-line">
+              <strong>Moderator</strong>
+              <div>!cmd add !test hello #reply#</div>
+            </div>
+            <div class="chat-line bot">
+              <strong>GavGavichBot_</strong>
+              <div>command !test added</div>
+            </div>
+            <div class="chat-line">
+              <strong>Fly</strong>
+              <div>!test</div>
+            </div>
+            <div class="chat-line reply bot">
+              <div class="reply-meta"><span class="reply-icon">↩</span><span>Replying to <span class="reply-ref">@Fly</span></span></div>
+              <strong>GavGavichBot_</strong>
+              <div>Hello</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="launch" class="panel">
+      <h2>Delivery and launch</h2>
+      <div class="launch" style="margin-top:16px;">
+        <div class="launch-step">
+          <strong>1. Ready package</strong>
+          The client receives the bot script, command storage files, and the launcher.
+        </div>
+        <div class="launch-step">
+          <strong>2. One-click startup</strong>
+          <span class="pill">start_bot.bat</span>
+        </div>
+        <div class="launch-step">
+          <strong>3. Saved custom commands</strong>
+          Newly created commands remain stored and continue working after restart.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const demos = {
+      tg: {
+        code: ["Fly: !tg"],
+        note: "Regular command example with a default Telegram link.",
+        chat: [
+          { who: "Fly", text: "!tg" },
+          { who: "GavGavichBot_", text: "Join my Telegram: https://t.me/your_channel", bot: true }
+        ]
+      },
+      tg3: {
+        code: ["Fly: !tg3"],
+        note: "The !commandNumber format repeats the command response several times.",
+        chat: [
+          { who: "Fly", text: "!tg3" },
+          { who: "GavGavichBot_", text: "Join my Telegram: https://t.me/your_channel", bot: true },
+          { who: "GavGavichBot_", text: "Join my Telegram: https://t.me/your_channel", bot: true },
+          { who: "GavGavichBot_", text: "Join my Telegram: https://t.me/your_channel", bot: true }
+        ]
+      },
+      spam: {
+        code: ["Fly: !spam hello 5"],
+        note: "Simple text spam mode for stream events and promotions.",
+        chat: [
+          { who: "Fly", text: "!spam hello 5" },
+          { who: "GavGavichBot_", text: "hello", bot: true },
+          { who: "GavGavichBot_", text: "hello", bot: true },
+          { who: "GavGavichBot_", text: "hello", bot: true },
+          { who: "GavGavichBot_", text: "hello", bot: true },
+          { who: "GavGavichBot_", text: "hello", bot: true }
+        ]
+      },
+      add: {
+        code: [
+          "Moderator: !cmd add !test hello %user% #reply#",
+          "Fly: !test"
+        ],
+        note: "",
+        chat: [
+          { who: "Moderator", text: "!cmd add !test hello %user% #reply#" },
+          { who: "GavGavichBot_", text: "command !test added", bot: true },
+          { who: "Fly", text: "!test" },
+          { who: "GavGavichBot_", text: "hello @Fly", bot: true, reply: true, replyTo: "@Fly" }
+        ]
+      }
+    };
+
+    const buttons = document.querySelectorAll(".chip");
+    const codeBox = document.getElementById("demoCode");
+    const noteBox = document.getElementById("demoNote");
+    const chatBox = document.getElementById("demoChat");
+
+    function renderDemo(key) {
+      const demo = demos[key];
+      codeBox.innerHTML = demo.code.map(line => `<div>${line}</div>`).join("");
+      noteBox.textContent = demo.note;
+      chatBox.innerHTML = demo.chat.map(item => `
+        <div class="chat-line ${item.bot ? "bot" : ""} ${item.reply ? "reply" : ""}">
+          ${item.reply ? `<div class="reply-meta"><span class="reply-icon">↩</span><span>Replying to <span class="reply-ref">${item.replyTo || "@Fly"}</span></span></div>` : ""}
+          <strong>${item.who}</strong>
+          <div>${item.text}</div>
+        </div>
+      `).join("");
+      buttons.forEach(button => button.classList.toggle("active", button.dataset.demo === key));
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => renderDemo(button.dataset.demo));
+    });
+
+    renderDemo("tg");
+  </script>
+</body>
+</html>
